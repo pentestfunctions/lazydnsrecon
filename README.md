@@ -14,7 +14,7 @@ Lazy DNS Recon is a Python script designed to automate various DNS reconnaissanc
 
 - Python 3.x
 - Selenium WebDriver
-- Firefox Browser and GeckoDriver
+- [Firefox Browser and GeckoDriver](https://github.com/mozilla/geckodriver/releases)
 
 ## Installation
 
