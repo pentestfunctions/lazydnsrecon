@@ -1,6 +1,6 @@
 # Lazy DNS Recon
 
-Lazy DNS Recon is a Python script designed to automate various DNS reconnaissance and information gathering tasks. It utilizes the Selenium WebDriver to interact with web services, conduct Google searches with specific queries related to the target domain, and gather information from various online tools.
+Lazy DNS Recon is a Python script designed to automate various DNS reconnaissance and information-gathering tasks. It utilizes the Selenium WebDriver to interact with web services, conduct Google searches with specific queries related to the target domain, and gather information from various online tools.
 
 ## Features
 
@@ -21,7 +21,7 @@ Lazy DNS Recon is a Python script designed to automate various DNS reconnaissanc
 1. Clone the repository:
 
    ```bash
-   [git clone https://github.com/pentestfunctions/lazydnsrecon](https://github.com/pentestfunctions/lazydnsrecon.git)
+   git clone https://github.com/pentestfunctions/lazydnsrecon.git
    cd lazydnsrecon
    ```
 Install the required Python packages:
