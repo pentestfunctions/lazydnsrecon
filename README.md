@@ -21,7 +21,7 @@ Lazy DNS Recon is a Python script designed to automate various DNS reconnaissanc
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/pentestfunctions/lazydnsrecon
+   [git clone https://github.com/pentestfunctions/lazydnsrecon](https://github.com/pentestfunctions/lazydnsrecon.git)
    cd lazydnsrecon
    ```
 Install the required Python packages:
