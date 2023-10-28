@@ -6,6 +6,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import TimeoutException
 
 import os
 
@@ -14,7 +15,9 @@ os.environ['MOZ_FORCE_DISABLE_E10S'] = '1'
 def parse_args():
     """ Script arguments """
     parser = argparse.ArgumentParser()
-    parser.add_argument('-d', '--domain', help='Enter the domain', required=True)
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument('-d', '--domain', help='Enter the domain')
+    group.add_argument('-u', '--username', help='Enter the username')
     return parser.parse_args()
 
 def get_ua():
@@ -118,14 +121,52 @@ def open_page(br, domain):
 
     br.switch_to.window(original_window)
         
+def search_username(br, username):
+    social_media_sites = [
+        "https://twitter.com/{}", "https://www.tiktok.com/@{}",
+        "https://disqus.com/by/{}", "https://instagram.com/{}", "https://www.pinterest.com/{}",
+        "https://facebook.com/{}", "https://patreon.com/{}", 
+        "https://imgur.com/user/{}", "https://pastebin.com/u/{}", 
+        "https://reddit.com/user/{}", "https://twitch.tv/{}", "https://fiverr.com/{}", 
+        "https://ask.fm/{}", "https://medium.com/@{}", "https://github.com/{}", 
+        "https://github.com/search?q={}&type=repositories", "https://flickr.com/people/{}", 
+        "https://themeforest.net/user/{}", "https://myspace.com/{}", "https://www.searchblogspot.com/search?q={}", 
+        "https://www.kickstarter.com/profile/{}", "https://about.me/{}", "https://deviantart.com/{}", 
+        "https://www.reverbnation.com/{}", "https://www.behance.net/{}", "https://buzzfeed.com/{}", 
+        "https://soundcloud.com/{}", "https://tumblr.com/{}", "https://grep.app/search?q={}", 
+        "{}.newgrounds.com", "{}.bandcamp.com/", "https://youtube.com/@{}"
+    ]
+
+    urls = [site.format(username) for site in social_media_sites]
+
+    # Open all tabs first
+    for url in urls:
+        br.execute_script("window.open();")
+
+    # Navigate to URLs in each tab
+    for window, url in zip(br.window_handles[1:], urls):
+        try:
+            br.switch_to.window(window)
+            br.get(url)
+            # TODO: Process the page as needed (if necessary)
+        except Exception as e:
+            print(f"An error occurred while opening {url}: {e}")
+        finally:
+            time.sleep(random.uniform(1, 3))  # Random delay between 1 and 3 seconds
+
 def main():
     args = parse_args()
-    if args.domain.startswith('http'):
-        sys.exit('[*] Do: -d example.com  Do not: -d http://example.com')
-    
     br = start_browser()
-    domain = args.domain
-    open_page(br, domain)
+
+    if args.domain:
+        if args.domain.startswith('http'):
+            sys.exit('[*] Do: -d example.com  Do not: -d http://example.com')
+        open_page(br, args.domain)
+    elif args.username:
+        search_username(br, args.username)
+
+        # After processing all the URLs, you can decide to close the browser or do something else
+        # br.quit()  # This will close the browser
 
 if __name__ == "__main__":
     main()
