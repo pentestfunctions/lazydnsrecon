@@ -1,4 +1,4 @@
-# Lazy DNS Recon
+# Lazy DNS Recon 🤖🛠️
 
 <p align="center">
   <img src="lazy.png" alt="Lazy Temp Girl Mascot">
