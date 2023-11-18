@@ -1,7 +1,7 @@
 # Lazy DNS Recon
 
 <p align="center">
-  <img src="lazy.png" alt="Kali Upgrade Temp Girl Mascot">
+  <img src="lazy.png" alt="Lazy Temp Girl Mascot">
 </p>
 
 Lazy DNS Recon is a Python script designed to automate various DNS reconnaissance and information-gathering tasks. It utilizes the Selenium WebDriver to interact with web services, conduct Google searches with specific queries related to the target domain, and gather information from various online tools.
